@@ -796,9 +796,10 @@
     .nav-links a { font-size: 10px; }
 
     /* HERO */
-    /* スマホでも 01 を縦組みのまま出す。左の溝（col 1-2 ＝ 約28px）に収まる。 */
+    /* スマホでも 01 を縦組みのまま出す。番号は3つとも小さめに。 */
     .hero-index { display: block; padding-top: 90px; }
-    .hero-title-block { grid-column: 3 / 25; padding-top: 90px; }
+    .hero-index, .section-number { font-size: 11px; }
+    .hero-title-block { grid-column: 1 / 25; padding-top: 10px; }
     .hero-title { font-size: clamp(48px, 12vw, 80px); line-height: 0.9; }
     .hero-sub { grid-column: 1 / 25; margin-top: 20px; }
     .hero-sub p { margin-left: 0; max-width: 100%; font-size: 11px; }
@@ -807,8 +808,18 @@
     .hero-scroll { display: none; }
 
     /* TABS */
-    .cat-tabs { overflow-x: auto; padding-top: 80px; }
-    .cat-tab { padding: 14px 20px; font-size: 10px; }
+    /* overflow-x: auto だけだと overflow-y が仕様上 auto に格上げされ、
+       タブが縦にもスクロールできる箱になってしまう。hidden を明示して水平に固定する。
+       touch-action は指定しない（指定するとタブ上から始めた縦スワイプで
+       ページ本体がスクロールできなくなるため）。 */
+    .cat-tabs {
+      overflow-x: auto;
+      overflow-y: hidden;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+      padding-top: 80px;
+    }
+    .cat-tab { padding: 14px 20px; font-size: 10px; flex-shrink: 0; white-space: nowrap; }
 
     /* SECTION HEADER */
     .section-header { padding: 40px 20px 24px; }
