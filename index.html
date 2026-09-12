@@ -12,6 +12,20 @@
      ・斜体とweight500はサイト内で未使用なので入れていない（23.8KB / base64 31.8KB）
      旧URLは 'Helvetica Neue' も Google から取得していたが、意図しているのは
      Mac/iOS のシステムフォントなので外した。 */
+  /* 和文だけ一回り小さく描画するための合成フォント。
+     OS標準のゴシックを local() で参照し、日本語のコードポイントにだけ当てて
+     size-adjust で 85% に縮める。欧文は EB Garamond のままなので影響しない。
+     size-adjust 非対応の環境では等倍で描画されるだけ（表示は壊れない）。 */
+  @font-face {
+    font-family: 'JP-Small';
+    src: local('Hiragino Sans'), local('Hiragino Kaku Gothic ProN'),
+         local('Yu Gothic Medium'), local('Yu Gothic'), local('Meiryo'),
+         local('Noto Sans JP');
+    unicode-range: U+3000-30FF, U+31F0-31FF, U+3200-4DBF, U+4E00-9FFF,
+                   U+F900-FAFF, U+FF00-FFEF;
+    size-adjust: 85%;
+  }
+
   @font-face {
     font-family: 'EB Garamond';
     font-style: normal;
@@ -845,7 +859,8 @@
   /* サイズはPC版に揃える。font-size / letter-spacing は基本CSS
      （13px / 0.02em）をそのまま継がせ、書体だけ混植に変える。 */
   .work-info-title {
-    font-family: var(--mix);
+    /* 欧文=EB Garamond / 和文=ゴシック（85%に縮小） */
+    font-family: 'EB Garamond', 'JP-Small', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: 500;
     font-style: normal;
     line-height: 1.4;
@@ -854,6 +869,7 @@
   .work-info-meta {
     color: var(--orange);
     opacity: 1;
+    font-size: 9px;
     letter-spacing: 0.14em;
     margin-top: 6px;
   }
