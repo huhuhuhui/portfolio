@@ -313,7 +313,7 @@
 
   /* ヒーローの `— 01` と同じく縦組み。左の溝（col 1-2）に置く。 */
   .section-number {
-    grid-column: 1 / 3;
+    grid-column: 1 / 2;
     align-self: start;
     /* vertical-rl は行が右から積まれるので、枠を伸ばしたままだと
        文字がセル右端（＝見出しのすぐ左）に寄る。start で左端に置く。 */
@@ -326,7 +326,7 @@
   }
 
   .section-title {
-    grid-column: 3 / 14;
+    grid-column: 2 / 14;
     font-family: var(--serif);
     font-size: clamp(32px, 4vw, 56px);
     font-weight: 500;
